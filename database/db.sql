@@ -1,0 +1,23 @@
+DROP DATABASE IF EXISTS database_links;
+CREATE DATABASE database_links CHARSET utf8mb4;
+USE database_links;
+
+-- USERS TABLE
+CREATE TABLE users(
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(20) NOT NULL,
+    password VARCHAR(60) NOT NULL,
+    email VARCHAR(120) NOT NULL,
+    fullname VARCHAR(100) NOT NULL
+);
+
+-- LINKS TABLE
+CREATE TABLE links(
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(100) NOT NULL,
+    url VARCHAR(100) NOT NULL,
+    description TEXT NOT NULL,
+    user_id INT UNSIGNED,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(id)
+);
